@@ -14,12 +14,17 @@ def browser_init():
 
 def test_github():
 
-    browser.open('https://github.com/')
+    with allure.step('Открываем главную страницу'):
+        browser.open('https://github.com/')
 
-    browser.element('.header-search-input').type('eroshenkoam/allure-example').press_enter()
+    with allure.step('Ищем репоситорий'):
+        browser.element('.header-search-input').type('eroshenkoam/allure-example').press_enter()
 
-    browser.element(by.link_text("eroshenkoam/allure-example")).click()
+    with allure.step('Переходим по ссылке репозитория'):
+        browser.element(by.link_text("eroshenkoam/allure-example")).click()
 
-    browser.element('#issues-tab').click()
+    with allure.step('Открываем таб Issues'):
+        browser.element('#issues-tab').click()
 
-    browser.element(by.partial_text('#76')).should(be.visible)
+    with allure.step(f'Проверяем наличие Issue с номером 76'):
+        browser.element(by.partial_text('#76')).should(be.visible)
