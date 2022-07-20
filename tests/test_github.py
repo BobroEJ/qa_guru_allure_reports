@@ -1,5 +1,6 @@
 import allure
 import pytest
+from allure_commons.types import Severity
 from selene import by, be
 from selene.support.shared import browser
 from selene.support.shared.jquery_style import s
@@ -12,6 +13,11 @@ def browser_init():
     browser.config._hold_browser_open = True
 
 
+@allure.tag('web')
+@allure.severity(Severity.NORMAL)
+@allure.feature('Задачи в репозитории')
+@allure.story('Проверяем видимость Issue #76, чистый селен')
+@allure.link('https://github.com/', name='Testing')
 def test_selene():
 
     browser.open('https://github.com/')
@@ -25,6 +31,11 @@ def test_selene():
     browser.element(by.partial_text('#76')).should(be.visible)
 
 
+@allure.tag('web')
+@allure.severity(Severity.NORMAL)
+@allure.feature('Задачи в репозитории')
+@allure.story('Проверяем видимость Issue #76, используем with allure.step')
+@allure.link('https://github.com/', name='Testing')
 def test_dynamic_steps():
 
     with allure.step('Открываем главную страницу'):
@@ -43,6 +54,11 @@ def test_dynamic_steps():
         browser.element(by.partial_text('#76')).should(be.visible)
 
 
+@allure.tag('web')
+@allure.severity(Severity.NORMAL)
+@allure.feature('Задачи в репозитории')
+@allure.story('Проверяем видимость Issue #76, используем @allure.step')
+@allure.link('https://github.com/', name='Testing')
 def test_decorator_steps():
     open_main_page()
     search_for_repository('eroshenkoam/allure-example')
